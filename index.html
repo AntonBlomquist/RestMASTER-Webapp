@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>3 semester - Project Airflow</title>
+</head>
+<body>
+
+    <div id="app">
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="text-center">PROJECT AIRFLOW</h1>
+            </div>
+            <div class="row">
+                <div class="col-6"> <!--RASPBERRY TEMP-->
+                    <div class="row">
+                        <div class="col-10">
+                            <h1>AirflowMaster <small>({{Data[0].classroom}})</small></h1>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <h4>Temperature</h4>
+                        </div>
+                        <div class="col-5">
+                            <h4>Humidity</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <h5>{{Data[0].temperature}}°</h5>
+                        </div>
+                        <div class="col-5">
+                            <h5>{{Data[0].humidity}}%</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6"> <!--OUTDOOR TEMP-->
+                    <div class="row">
+                        <div class="col-10">
+                            <h1>Outdoor temp <small>({{ThirdPartyData.location.name}})</small></h1>
+                            <hr>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <h4>Temperature</h4>
+                        </div>
+                        <div class="col-5">
+                            <h4>Humidity</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5">
+                            <h5>{{ThirdPartyData.current.temp_c}}°</h5>
+                        </div>
+                        <div class="col-5">
+                            <h5>{{ThirdPartyData.current.humidity}}%</h5>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <br>
+            <br>
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#logmodal">Open log from Raspberry PI</button>
+            <br>
+            <hr>
+            
+            <div class="modal" id="logmodal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h4 class="modal-title">Temperature log</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th v-for="(value, name) in Data[0]">{{name}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="dat in Data">
+                                        <td v-for="da in dat">{{da}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="bg-light text-center text-lg-start" style="position: fixed; left: 0; bottom: 0; width: 60%; margin-left: 20%">
+                <div class="text-right p-3" style="background-color: rgba(0, 0, 0, 0.2);">© Dream Team 5: Zlatan, Mathias, Patrick & Anton</div>
+              </footer>
+        </div>
+    </div>
+
+<script src="javascript.js"></script> 
+</body>
+
+</html>
